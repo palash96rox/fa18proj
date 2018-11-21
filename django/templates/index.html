@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML>
+
+
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Index</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+	</head>
+	<body class="landing is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+
+					<nav id="nav">
+						<ul>
+							<li><a href="{% url 'accounts:index' %}">Home</a></li>
+                            <li><a href="">Post  {{ user.username }}</a></li>
+
+							<li>
+								<a href="#" class="icon fa-angle-down">Layouts</a>
+								<ul>
+
+
+
+
+                            {%  if user.is_authenticated %}
+                            <li> <a href="{% url 'accounts:logout' %}" class="button">Logout</a></li>
+                            {% else %}
+							<li><a href="{% url 'accounts:login' %}" class="button">Login</a></li>
+                            {% endif %}
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+
+					<ul class="actions special">
+                        {%  if user.is_authenticated %}
+                            <li><a href="{% url 'accounts:register' %}" class="button primary">Post AD</a></li>
+                        {% else %}
+						<li><a href="{% url 'accounts:register' %}" class="button primary">Sign Up</a></li>
+                        {% endif %}
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul>
+                    
+				
+				</section>
+
+	</body>
+</html>
