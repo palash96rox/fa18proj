@@ -132,4 +132,3 @@ def initialize(): #get set go
 wordfreq={} #unique words dictionary with frequency for english
 hindi={}    #unique words dictionary with frequency for hindi
 initialize()
-
