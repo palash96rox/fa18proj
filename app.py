@@ -32,9 +32,6 @@ class App():
         self.root,self.counts = builder.trie_builder(books,invalids)
         self.update_stats(self.counts)
 
-    def run_terminal(self):
-        # Clear the screen 
-
     def suggest(self,typed=''):
         # Return top 10 suggestions in order of highest probability
 
@@ -50,11 +47,20 @@ class App():
 
         return [item[0] for item in suggestions] # return only the words
 
-    def start(self):
-        self.run_terminal()
 
 class AppController():
-    def __init__(self, apps=[]):
-        self.apps = apps
 
+    # sessions = { 'session_id': {'instance': App(), 'typed_past': '', 'typed_current': '', 'suggestions': []},}
+    def __init__(self, sessions=dict()):
+        self.sessions = sessions
+
+    def run_terminal(self):
+       # Clear the screen
+       pass
+
+    def login(self):
+        pass
+
+    def start(self):
+        self.run_terminal()
     

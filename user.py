@@ -6,3 +6,6 @@ class User():
         self.pref = pref
         self.library = library
         self.scripts = scripts
+
+    def make_library(self):
+        pass

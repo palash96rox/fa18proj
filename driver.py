@@ -47,3 +47,17 @@ def build():
     return books_data,users_data
 
 books,users = build()
+
+print(books['eng']['root'].get_counts(books['eng']['root'],'and'))
+print()
+nodeInTrie = books['eng']['root'].update_counts(books['eng']['root'],'and')
+print(books['eng']['root'].get_counts(books['eng']['root'],'and'))
+print()
+nodeInTrie = nodeInTrie.update_counts(books['eng']['root'],'a')
+print(books['eng']['root'].get_counts(books['eng']['root'],'and'))
+print()
+nodeInTrie = nodeInTrie.update_counts(nodeInTrie,'nd')
+print(books['eng']['root'].get_counts(books['eng']['root'],'and'))
+print()
+print(books['eng']['root'].get_counts(books['eng']['root'],'palash'))
+print()
