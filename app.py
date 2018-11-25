@@ -51,12 +51,13 @@ class App():
 class AppController():
 
     # sessions = { 'session_id': {'instance': App(), 'typed_past': '', 'typed_current': '', 'suggestions': []},}
-    def __init__(self, sessions=dict()):
+    def __init__(self, sessions=dict(), users=dict()):
         self.sessions = sessions
+        self.users = users
 
     def run_terminal(self):
        # Clear the screen
-       pass
+       
 
     def login(self):
         pass

@@ -34,7 +34,7 @@ class Trie:
         return self.dic[key].num_count(word[1:])
 
     def calculate_weight(self, value, total):
-        # 0.5*(frequency of word) + 0.5*(probabilty of that pattern)
+        # 0.2*(frequency of word) + 0.3*() + 0.5*(typing_style)
         word, count = value
 
         prob = count/total
@@ -47,7 +47,9 @@ class Trie:
             node = node.dic[key]
         word_weight = word_weight/len(word)
 
-        val = 0.5*prob + 0.5*weight
+        
+
+        val = 0.2*prob + 0.3*word_weight + 0.5*typing_weight
 
         return (word,val)
 
