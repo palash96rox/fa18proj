@@ -35,3 +35,5 @@ def merge_lists(lists):
             if word not in merged and len(word)>0:
                 merged.append(word)
     return sorted(merged)
+
+curr_node = lambda node,sequence: curr_node(node[sequence[0]],sequence[1:]) if len(sequence)>0 else node

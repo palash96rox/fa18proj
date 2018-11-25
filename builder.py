@@ -37,12 +37,18 @@ def build(file, data, invalids, lang = 'def') :
 
     return data
 
-def trie_builder(library={},invalids=[]):
+def def_trie_builder(library={},invalids=[]):
     data = dict()
     for lang in library.keys():
         for book in library[lang]:
             data = build(book,data,invalids,lang)
     return data
+
+def trie_builder(books=[],invalids=[]):
+    data = dict()
+    for book in books:
+        data = build(book,data,invalids,'session')
+    return data['session']['root'],data['session']['word_count']
 
 def update_files(data,):
     for lang in data.keys():

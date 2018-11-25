@@ -2,9 +2,7 @@ import os
 import datetime
 import builder
 import helpers
-import pprint
-
-LIB_DIR = os.path.join(os.getcwd(),'lib')
+from consts import LIB_DIR
 
 def build():
     invalids = dict()
@@ -21,6 +19,7 @@ def build():
                 library[dir].append(path)
 
     # Get user library
+    # TODO privacy
     users = dict()
     for dir in os.listdir(os.path.join(LIB_DIR,'users')):
         users[dir] = []
@@ -37,13 +36,13 @@ def build():
         illegal_chars = helpers.merge_lists([invalids[typ],illegal_chars])
 
     # Build tries
-    books_data = builder.trie_builder(library,illegal_chars)
-    users_data = builder.trie_builder(users,illegal_chars)
+    books_data = builder.def_trie_builder(library,illegal_chars)
+    users_data = builder.def_trie_builder(users,illegal_chars)
 
     # Update files at 0420hrs
     if str(datetime.datetime.now().time())[:5] == '04:20':
         builder.update_files(books_data)
-        builder.update_files(users_data)
+        builder.update_files(users_data) # TODO Privacy
 
     return books_data,users_data
 
