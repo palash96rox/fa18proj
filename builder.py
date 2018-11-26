@@ -19,7 +19,7 @@ def build(file, data, invalids, lang = 'def') :
         for line in lines:
             words = re.split('\W+',line)
             for word in words:
-                word = word.lower().strip()
+                word = word.strip()
                 if helpers.isAlphabet(word): # NO need to store nums
                     word = helpers.justWord(word,tuple(invalids))
                     if word not in counts.keys() :

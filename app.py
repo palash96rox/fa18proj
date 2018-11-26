@@ -43,7 +43,7 @@ class App():
         # Get all words possible from sequence
         matched_freq = [(word,count) for word,count in self.counts.items() if word.startswith(typed)] 
         typed10_words = sorted(matched_freq, key=lambda kv: kv[1], reverse=True)[:10]
-        typed10 = [helpers.curr_node(self.root,typed).calculate_weight(word,self.total_all) for word in typed10_words]
+        typed10 = [helpers.curr_node(self.root,typed).calculate_weight(word.replace(typed[:len(typed)-1],''),self.total_all) for word in typed10_words]
 
         relevant = [item for item in self.top100 if item[0].startswith(typed)]
 
@@ -66,13 +66,15 @@ class Session():
 class AppController():
 
     # sessions = { 'session_id': {'instance': App(), 'typed_past': '', 'typed_current': '', 'suggestions': []},}
-    def __init__(self, sessions=dict()):
+    def __init__(self, sessions=dict(), users=dict()):
         self.sessions = sessions
+        self.users = users
 
     def run_terminal(self):
        # Clear the screen
         shell = AutocompleteShell()
         shell.cmdloop()
+       
 
     def login(self):
         pass

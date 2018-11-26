@@ -1,10 +1,36 @@
+# coding=utf-8
+
 class Trie:
 
-    def __init__(self):
-        self.dic = {}
+    def __init__(self, lang='eng'):
         self.isEnd = False
         self.count_letter_in_word = 0
         self.count_typing_pattern = 0
+        self.dic = self.create_dict(lang.lower())
+
+
+    def create_dict(self,lang):
+        # Src https://www.periodni.com/unicode_utf-8_encoding.html
+        dic = dict()
+        # DEFAULT - ENGLISH
+        files = ['eng']
+        if 'hin' in lang:
+            files.append('hin')
+        if 'fr' in lang:
+            files.append('fr')
+        if 'ita' in lang:
+            files.append('ita')
+        if 'de' in lang:
+            files.append('de')
+        if 'es' in lang.lower():
+            files.append('es')
+        if 'gr' in lang.lower():
+            files.append('gr')
+        for file in files:
+            with open('lib/lang/chars/'+file) as the_file:
+                chars = the_file.read().splitlines()
+                for char in chars: dic[ord(char)] = None
+        return dic
 
     def __str__(self):
         stri = ''
@@ -28,24 +54,24 @@ class Trie:
             self.isEnd = True
             return
         key = ord(word[0])
-        if key not in self.dic:
+        if self.dic.get(key):
             self.dic[key] = Trie()
         self.dic[key].count_letter_in_word += 1
         self.dic[key].addWord(word[1:])
 
     def exists(self, word):
         if len(word) == 0:
-            return self.isEnd
+            return True
         key = ord(word[0])
         if key not in self.dic:
             return False
         return self.dic[key].num_count(word[1:])
 
     def calculate_weight(self, value, total):
-        # 0.5*(frequency of word) + 0.5*(probabilty of that pattern)
+        # 0.2*(frequency of word) + 0.3*() + 0.5*(typing_style)
         word, count = value
 
-        prob = count/total
+        freq = count/total
 
         node = self
         word_weight = 0
@@ -55,9 +81,14 @@ class Trie:
             node = node.dic[key]
         word_weight = word_weight/len(word)
 
-        val = 0.5*prob + 0.5*weight
+        typing_weight = 0
+        while(word != 0):
+            node = self
+            if not node.exists(word): break
 
-        return (word,val)
+        val = 0.2*freq + 0.3*word_weight + 0.5*typing_weight
+
+        return (value[0],val)
 
     # Get the total number of times the letters are typed in that order for a word
     def get_counts(self,node,word,sum=0):
