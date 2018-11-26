@@ -15,6 +15,14 @@ class Trie:
         stri += '\n\n'
         return stri
 
+    def __dict__(self):
+        dic = dict()
+        # node = self
+        # while(node != )
+        # for key in node.keys():
+        # TODO
+        return dic
+
     def addWord(self, word):
         if len(word) == 0:
             self.isEnd = True

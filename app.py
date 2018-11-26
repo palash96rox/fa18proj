@@ -1,7 +1,11 @@
+import os
 import builder
 import helpers
 from user import User
+from shell import AutocompleteShell
 from exceptions import UserNotFound, EmptyBookList
+
+system = os.getenv('DESKTOP_SESSION')
 
 class App():
     def __init__(self, state=0, root=None, counts=dict(), user=None):
@@ -47,6 +51,17 @@ class App():
 
         return [item[0] for item in suggestions] # return only the words
 
+    def save_to_file(self):
+        update_stats(self.counts)
+        builder.update_file(self.root, self.counts, self.top100, self.user)
+
+
+class Session():
+    id = generateID()
+
+    def generateID():
+        pass
+        
 
 class AppController():
 
@@ -56,7 +71,8 @@ class AppController():
 
     def run_terminal(self):
        # Clear the screen
-       pass
+        shell = AutocompleteShell()
+        shell.cmdloop()
 
     def login(self):
         pass

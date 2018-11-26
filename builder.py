@@ -64,3 +64,6 @@ def update_files(data,):
             merged = helpers.merge_lists([data[lang]['unique_words'],words_in_file,])
             for word in merged:
                 word_file.write(word+'\n')
+
+def update_file(root,freq,top100,user):
+    
