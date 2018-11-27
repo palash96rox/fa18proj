@@ -34,7 +34,9 @@ def build(file, data, invalids, lang = DEFAULT_LANGUAGE) :
         sentences = re.split(r'\. |\.$|\?|\!|\r|\t|;|(  )|(\n)|(\n\n)',re.sub(r'(?!\n$)(\n)', lambda matchobj: ' ', doc))
         sentences = [sentence for sentence in sentences if sentence and sentence.strip()]
 
-        for sentence in sentences: sentence_root.add(sentence)
+        for sentence in sentences: 
+            sentence_root.add(sentence)
+            
 
 
         # for line in lines:
