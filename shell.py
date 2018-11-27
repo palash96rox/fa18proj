@@ -1,4 +1,4 @@
-import cmd, sys
+import os, cmd, sys
 from app import App
 from consts import DEFAULT_LIBRARY
 
@@ -22,6 +22,7 @@ class AutocompleteShell(cmd.Cmd):
         pass
 
     def do_build(self, arg=DEFAULT_LIBRARY):
+        
 
     # Utility
     def preloop(self):
