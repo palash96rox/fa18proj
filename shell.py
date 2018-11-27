@@ -1,5 +1,6 @@
 import cmd, sys
-for app import App
+from app import App
+from consts import DEFAULT_LIBRARY
 
 class AutocompleteShell(cmd.Cmd):
     intro = 'Welcome to the autocomplete shell. Type ? for help!'
@@ -19,6 +20,8 @@ class AutocompleteShell(cmd.Cmd):
 
     def do_complete(self, arg):
         pass
+
+    def do_build(self, arg=DEFAULT_LIBRARY):
 
     # Utility
     def preloop(self):

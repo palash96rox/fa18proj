@@ -1,12 +1,17 @@
 # coding=utf-8
+from consts import WORD_ENDERS
 
 class Trie:
 
-    def __init__(self, lang='eng'):
+    def __init__(self, key, lang='eng'):
+        self.value = chr(key) if type(key)==int else 'root'
+        self.end_of_word = False
+        self.end_of_sentence = False
         self.isEnd = False
         self.count_letter_in_word = 0
         self.count_typing_pattern = 0
-        self.dic = self.create_dict(lang.lower())
+        self.lang = lang.lower()
+        self.dic = self.create_dict(self.lang)
 
 
     def create_dict(self,lang):
@@ -34,10 +39,13 @@ class Trie:
 
     def __str__(self):
         stri = ''
-        stri += 'letter: ' + str(self.count_letter_in_word) + '\n'
-        stri += 'typing: ' + str(self.count_typing_pattern) + '\n'
+        stri += 'value: ' + str(self.value) + '\n'
+        stri += 'word: ' + str(self.end_of_word) + '\n'
+        stri += 'sentence: ' + str(self.end_of_sentence) + '\n'
+        stri += 'word seq: ' + str(self.count_letter_in_word) + '\n'
+        stri += 'sentence seq: ' + str(self.count_typing_pattern) + '\n'
         stri += '\nNextNode: '
-        stri += str(sorted(self.dic))
+        stri += str([chr(key) for key in sorted(self.dic) if self.dic[key]])
         stri += '\n\n'
         return stri
 
@@ -49,12 +57,35 @@ class Trie:
         # TODO
         return dic
 
+    def add(self, string):
+        if len(string) == 0: 
+            self.end_of_word = True
+            self.end_of_sentence = True
+            return self
+        key = ord(string[0])
+        if chr(key) in WORD_ENDERS and self.value != 'root': self.end_of_word = True
+        if not self.dic.get(key): self.dic[key] = Trie(key,self.lang)
+        if chr(key) not in WORD_ENDERS: self.dic[key].count_letter_in_word += 1
+        self.dic[key].count_typing_pattern += 1
+        return self.dic[key].add(string[1:])
+
+    # TODO
+    # def get_words(self):
+    #     words = dict()
+    #     for key in self.dic:
+    #         if self.dic[key].count_letter_in_word == 0: continue
+    #         words[chr(key)] = []
+    #         root = self.dic[key]
+    #         while not root.end_of_word:
+    #             word += ''
+    #    return words
+
     def addWord(self, word):
         if len(word) == 0:
             self.isEnd = True
             return
         key = ord(word[0])
-        if self.dic.get(key):
+        if self.dic.get(key) == None:
             self.dic[key] = Trie()
         self.dic[key].count_letter_in_word += 1
         self.dic[key].addWord(word[1:])
