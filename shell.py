@@ -22,7 +22,7 @@ class AutocompleteShell(cmd.Cmd):
         pass
 
     def do_build(self, arg=DEFAULT_LIBRARY):
-
+        pass
     # Utility
     def preloop(self):
         super(AutocompleteShell,self).preloop()

@@ -30,11 +30,22 @@ def build(file, data, invalids, lang = DEFAULT_LANGUAGE) :
     with codecs.open(file, encoding='utf-8', errors='ignore') as the_file:
         doc = the_file.read()
         lines = doc.splitlines()
-        
-        sentences = re.split(r'\. |\.$|\?|\!|\r|\t|;|(  )|(\n)|(\n\n)',re.sub(r'(?!\n$)(\n)', lambda matchobj: ' ', doc))
-        sentences = [sentence for sentence in sentences if sentence and sentence.strip()]
+        words = []
+        unique = []
 
-        for sentence in sentences: sentence_root.add(sentence)
+        for line in lines:
+            words = re.split(r'\W+',line)
+            for word in words:
+                word = word.strip()
+                if word not in unique: unique.append(word)
+
+
+        
+        
+        # sentences = re.split(r'\. |\.$|\?|\!|\r|\t|;|(  )|(\n)|(\n\n)',re.sub(r'(?!\n$)(\n)', lambda matchobj: ' ', doc))
+        # sentences = [sentence for sentence in sentences if sentence and sentence.strip()]
+
+        # for sentence in sentences: sentence_root.add(sentence)
 
 
         # for line in lines:

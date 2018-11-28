@@ -1,4 +1,4 @@
-from constanrs import USERS_DIR
+from consts import USERS_DIR
 from app import Session
 
 class User():
