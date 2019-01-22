@@ -10,7 +10,7 @@ data = dict()
 # Word cleaner
 def justWord(word) :
     # print('received--',word)
-    invalid = ('.','!','(',')','[',']','{','}','|',',','-','।','\'','_',';',':','\"','”','“')
+    invalid = ('.','!','(',')','[',']','{','}','|',',','-','।','\'','_',';',':','\"','”','“',' ')
     if word.endswith(invalid):
         return justWord(word[:len(word)-1])
     if word.startswith(invalid):
@@ -45,5 +45,5 @@ def build(file, lang = 'def') :
 pprint.pprint(data)
 build('pride.txt','eng')
 pprint.pprint(data)
-# build('hindi.txt','hin')
-# pprint.pprint(data)
+build('hindi.txt','hin')
+pprint.pprint(data)
