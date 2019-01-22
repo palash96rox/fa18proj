@@ -64,7 +64,7 @@ def printTop5(matchfreq): #printing highest frequency words
 def English(): #for english
     print("English is selected")
     myobj=Trie() #creating object
-    f=open("dict.txt",'r')
+    f=open("pride.txt",'r')
     lines=f.read().splitlines()#reading file and removing \n
     for i in lines: #reading words
           i=i.lower().strip()
